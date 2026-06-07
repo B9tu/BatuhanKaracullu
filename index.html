@@ -131,7 +131,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
     <script>
-        // Senin Firebase Bilgilerin
         const firebaseConfig = {
             apiKey: "AIzaSyBshUFXo45eBAvT4p1sRgV4twS7IZaoyxg",
             authDomain: "mobisinav.firebaseapp.com",
@@ -144,19 +143,12 @@
         };
         
         firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        const db = firebase.database();
 
-        // Firebase'den veriyi çekip tırnakları temizleyen sihirli kod
-        database.ref('besiktas').on('value', (snapshot) => {
-            const veri = snapshot.val();
-            if (veri) {
-                // Gelen verideki tırnak ve ters eğik çizgileri süpürüyoruz
-                let temizMetin = String(veri).replace(/["\\]/g, '');
-                document.getElementById("ekran").innerText = temizMetin.toUpperCase();
-            } else {
-                document.getElementById("ekran").innerText = "BEŞİKTAŞ";
-            }
-        });
+        // Verileri canlı dinle ve yerleştir
+        db.ref('title').on('value', (s) => { document.getElementById('title-alan').innerText = s.val() || 'BAŞLIK'; });
+        db.ref('content').on('value', (s) => { document.getElementById('content-alan').innerText = s.val() || 'İÇERİK'; });
+        db.ref('description').on('value', (s) => { document.getElementById('description-alan').innerText = s.val() || 'AÇIKLAMA'; });
     </script>
 </body>
 </html>
