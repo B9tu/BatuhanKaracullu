@@ -7,123 +7,52 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* Tüm sayfa ayarları */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background-color: #0b0b0b; color: #ffffff; height: 100vh; display: flex; justify-content: center; align-items: center; overflow: hidden; position: relative; }
+        body::before { content: ""; position: absolute; width: 150%; height: 150%; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%); z-index: 1; }
 
-        body {
-            background-color: #0b0b0b;
-            color: #ffffff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
-        }
+        .container { text-align: center; z-index: 2; padding: 20px; width: 100%; max-width: 800px; }
 
-        /* Arka plandaki dev logo veya desen efekti */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
-            z-index: 1;
-        }
+        /* Eski tasarımın şık rozeti */
+        #title-alan { background-color: #e31b23; color: white; padding: 6px 16px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; border-radius: 50px; display: inline-block; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(227, 27, 35, 0.4); }
 
-        /* Ana Kart kutusu */
-        .container {
-            text-align: center;
-            z-index: 2;
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
+        /* Eski büyük başlık stili */
+        .hero-title { font-size: 3.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; line-height: 1.1; }
+        .white-text { color: #ffffff; display: block; font-size: 2.5rem; opacity: 0.8; font-weight: 400; }
 
-        /* Üstteki küçük kırmızı detay çizgisi */
-        .badge {
-            background-color: #e31b23;
-            color: white;
-            padding: 6px 16px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            border-radius: 50px;
-            display: inline-block;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(227, 27, 35, 0.4);
-        }
+        /* İçerik (Büyük metin) */
+        #content-alan { display: block; color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.2); font-size: 4.5rem; margin-top: 10px; }
 
-        /* Büyük Başlık Tasarımı */
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }
+        /* Açıklama alanı */
+        #description-alan { color: #aaaaaa; font-size: 1.3rem; margin-top: 20px; line-height: 1.6; }
 
-        .hero-title .white-text {
-            color: #ffffff;
-            display: block;
-            font-size: 2.5rem;
-            opacity: 0.8;
-            font-weight: 400;
-        }
-
-        /* Telefondan gelen ve anlık değişen kısım */
-        .dynamic-text {
-            display: block;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            font-size: 4.5rem;
-            margin-top: 10px;
-            word-wrap: break-word;
-            transition: all 0.3s ease;
-        }
-
-        /* Alt süsleme çizgileri */
-        .stripes {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin-top: 30px;
-        }
-
-        .stripe {
-            height: 4px;
-            width: 40px;
-            background-color: #ffffff;
-        }
-        .stripe.black { background-color: #ffffff; }
+        .stripes { display: flex; justify-content: center; gap: 5px; margin-top: 30px; }
+        .stripe { height: 4px; width: 40px; background-color: #ffffff; }
         .stripe.red { background-color: #e31b23; }
 
-        /* Mobil Ekranlar İçin Uyumluluk */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem; }
-            .hero-title .white-text { font-size: 1.8rem; }
-            .dynamic-text { font-size: 3rem; }
+            .white-text { font-size: 1.8rem; }
+            #content-alan { font-size: 3rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <div class="badge">Anlık Mobil Bağlantı</div>
+        <div id="title-alan">YÜKLENİYOR...</div>
+        
         <h1 class="hero-title">
             <span class="white-text">YALNIZ</span>
-            <span class="dynamic-text" id="ekran">BEŞİKTAŞ</span>
+            <span id="content-alan">BEŞİKTAŞ</span>
         </h1>
+
+        <p id="description-alan">YÜKLENİYOR...</p>
+        
         <div class="stripes">
-            <div class="stripe black"></div>
+            <div class="stripe"></div>
             <div class="stripe red"></div>
-            <div class="stripe black"></div>
+            <div class="stripe"></div>
         </div>
     </div>
 
@@ -145,10 +74,10 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // Verileri canlı dinle ve yerleştir
-        db.ref('title').on('value', (s) => { document.getElementById('title-alan').innerText = s.val() || 'BAŞLIK'; });
-        db.ref('content').on('value', (s) => { document.getElementById('content-alan').innerText = s.val() || 'İÇERİK'; });
-        db.ref('description').on('value', (s) => { document.getElementById('description-alan').innerText = s.val() || 'AÇIKLAMA'; });
+        // 3 etiketi de dinliyoruz
+        db.ref('title').on('value', (s) => { document.getElementById('title-alan').innerText = s.val() || 'ANLIK BİLDİRİM'; });
+        db.ref('content').on('value', (s) => { document.getElementById('content-alan').innerText = s.val() || 'BEŞİKTAŞ'; });
+        db.ref('description').on('value', (s) => { document.getElementById('description-alan').innerText = s.val() || 'ŞAMPİYONLAR LİGİ ŞAMPİYONU'; });
     </script>
 </body>
 </html>
