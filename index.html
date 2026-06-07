@@ -1,783 +1,162 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Beşiktaş JK — Kartal Yuvası</title>
-<link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/330px-BesiktasJK-Logo.svg.png"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@300;400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet"/>
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{--black:#0a0a0a;--white:#f5f0e8;--gold:#c9a84c;--gold-light:#e8c96a;--red:#cc2222;--green:#3a9e5f;--gray:#1a1a1a;--mid:#242424;--mid2:#2e2e2e}
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:'Oswald',sans-serif;overflow-x:hidden;cursor:none}
-.cursor{position:fixed;width:12px;height:12px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .1s ease;transform:translate(-50%,-50%)}
-.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(201,168,76,.5);border-radius:50%;pointer-events:none;z-index:9998;transition:width .3s,height .3s;transform:translate(-50%,-50%)}
-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1rem 3.5rem;background:rgba(10,10,10,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(201,168,76,.15);transition:background .3s}
-.nav-logo{display:flex;align-items:center;gap:.8rem;text-decoration:none;cursor:none}
-.nav-eagle{height:38px;width:auto;filter:drop-shadow(0 0 8px rgba(201,168,76,.4));animation:floatEagle 3s ease-in-out infinite}
-@keyframes floatEagle{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.nav-brand{font-family:'Bebas Neue',cursive;font-size:1.5rem;letter-spacing:.15em;color:var(--white)}
-.nav-brand span{color:var(--gold)}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:.75rem;letter-spacing:.2em;color:rgba(245,240,232,.65);text-decoration:none;text-transform:uppercase;transition:color .3s;position:relative;cursor:none}
-.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
-.nav-links a:hover,.nav-links a.active{color:var(--gold)}
-.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
-.nav-btn{background:var(--gold);color:var(--black);border:none;padding:.6rem 1.4rem;font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;cursor:none;font-weight:700;transition:all .3s}
-.nav-btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.35)}
-#hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(10,10,10,.92) 0%,rgba(17,17,17,.85) 50%,rgba(10,10,10,.95) 100%),url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg/1280px-T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg') center/cover no-repeat}
-.hero-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(201,168,76,.12) 0%,transparent 60%),radial-gradient(ellipse at 20% 80%,rgba(204,34,34,.08) 0%,transparent 50%)}
-.hero-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(201,168,76,.025) 60px,rgba(201,168,76,.025) 61px)}
-.hero-crest{position:absolute;right:4rem;top:50%;transform:translateY(-50%);width:min(38vw,520px);height:auto;opacity:.10;pointer-events:none;filter:drop-shadow(0 0 60px rgba(201,168,76,.3))}
-.hero-content{position:relative;z-index:2;padding:0 4rem;max-width:820px}
-.hero-badge{display:inline-flex;align-items:center;gap:.6rem;border:1px solid rgba(201,168,76,.4);padding:.4rem 1rem;font-size:.65rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeUp .8s .2s forwards}
-.hero-badge::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
-.hero-title{font-family:'Bebas Neue',cursive;font-size:clamp(4rem,10vw,10rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s .4s forwards}
-.hero-title .line2{color:var(--gold);display:block}
-.hero-sub{font-family:'Crimson Pro',serif;font-style:italic;font-size:1.25rem;color:rgba(245,240,232,.75);line-height:1.7;max-width:480px;margin-bottom:3rem;opacity:0;animation:fadeUp .8s .6s forwards}
-.hero-ctas{display:flex;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .8s forwards}
-.btn-primary{background:var(--gold);color:var(--black);border:none;padding:1rem 2.5rem;font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;cursor:none;transition:all .3s;text-decoration:none;display:inline-block}
-.btn-primary:hover{background:var(--gold-light);transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,168,76,.3)}
-.btn-outline{border:1px solid rgba(245,240,232,.3);color:var(--white);padding:1rem 2.5rem;font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;cursor:none;transition:all .3s;text-decoration:none;display:inline-block;background:transparent}
-.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
-.hero-stats{position:absolute;right:4rem;bottom:4rem;display:flex;gap:3rem;opacity:0;animation:fadeUp .8s 1s forwards;z-index:2}
-.stat{text-align:center}
-.stat-num{font-family:'Bebas Neue',cursive;font-size:3rem;color:var(--gold);line-height:1;display:block}
-.stat-label{font-size:.6rem;letter-spacing:.2em;color:rgba(245,240,232,.5);text-transform:uppercase;display:block;margin-top:.3rem}
-.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(245,240,232,.4);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:fadeUp .8s 1.2s forwards;z-index:2}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollLine 2s ease-in-out infinite}
-@keyframes scrollLine{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.ticker-wrap{background:var(--gold);overflow:hidden;padding:.65rem 0}
-.ticker{display:flex;animation:ticker 35s linear infinite;white-space:nowrap}
-.ticker-item{font-family:'Bebas Neue',cursive;font-size:1.05rem;color:var(--black);letter-spacing:.1em;padding:0 2rem}
-.ticker-sep{color:rgba(10,10,10,.35)}
-@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.section-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:2.5rem}
-.section-label{font-size:.62rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:.6rem}
-.section-title{font-family:'Bebas Neue',cursive;font-size:clamp(2.5rem,5vw,4.5rem);line-height:1;letter-spacing:.03em}
-.see-all{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-decoration:none;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:2px;transition:opacity .3s;cursor:none}
-.see-all:hover{opacity:.6}
-.tabs{display:flex;gap:2px;margin-bottom:2.5rem;background:var(--mid);padding:4px;width:fit-content}
-.tab-btn{font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.5);background:transparent;border:none;padding:.6rem 1.4rem;cursor:none;transition:all .3s}
-.tab-btn.active{background:var(--gold);color:var(--black);font-weight:700}
-.tab-btn:not(.active):hover{color:var(--white)}
-/* FIXTURES */
-#fixtures{padding:6rem 4rem;background:var(--gray);position:relative}
-#fixtures::before{content:'FIKSTÜR';position:absolute;right:2rem;top:2rem;font-family:'Bebas Neue',cursive;font-size:8rem;color:rgba(255,255,255,.018);letter-spacing:.1em;pointer-events:none}
-.fixture-list{display:flex;flex-direction:column;gap:2px}
-.fixture{display:grid;grid-template-columns:140px 1fr 130px 1fr 110px;align-items:center;gap:1.5rem;padding:1.4rem 2rem;background:var(--mid);border-left:3px solid transparent;transition:all .3s;cursor:none;position:relative;overflow:hidden}
-.fixture::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(201,168,76,.06),transparent);opacity:0;transition:opacity .3s}
-.fixture:hover{border-left-color:var(--gold);transform:translateX(6px)}
-.fixture:hover::after{opacity:1}
-.fixture.next{border-left-color:var(--gold);background:linear-gradient(90deg,rgba(201,168,76,.07),var(--mid))}
-.fixture.hidden{display:none}
-.fixture-date{font-size:.7rem;letter-spacing:.08em;color:rgba(245,240,232,.4);line-height:1.5}
-.next-badge{display:block;font-size:.55rem;color:var(--gold);letter-spacing:.2em;font-weight:700;margin-top:3px}
-.fixture-team{font-size:1rem;font-weight:600;letter-spacing:.04em}
-.fixture-team.away{text-align:right}
-.fixture-center{display:flex;flex-direction:column;align-items:center;gap:.2rem}
-.fixture-score{font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:.1em;line-height:1}
-.fixture-score.win{color:var(--green)}.fixture-score.loss{color:var(--red)}.fixture-score.draw{color:rgba(245,240,232,.5)}
-.fixture-vs{font-family:'Bebas Neue',cursive;font-size:1.6rem;color:var(--gold);letter-spacing:.1em}
-.fixture-time{font-size:.75rem;color:var(--gold);font-weight:600}
-.fixture-result{font-size:.55rem;letter-spacing:.15em;font-weight:700;padding:2px 6px;margin-top:2px}
-.fixture-result.win{background:rgba(58,158,95,.2);color:var(--green)}
-.fixture-result.loss{background:rgba(204,34,34,.2);color:var(--red)}
-.fixture-result.draw{background:rgba(255,255,255,.08);color:rgba(245,240,232,.5)}
-.fixture-league{font-size:.58rem;letter-spacing:.1em;color:rgba(245,240,232,.3);text-transform:uppercase;text-align:right;line-height:1.6}
-/* SQUAD */
-#squad{padding:6rem 4rem;background:var(--black)}
-.squad-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:3px}
-.player-card{position:relative;aspect-ratio:3/4;background:var(--gray);overflow:hidden;cursor:none}
-.player-card::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.95) 0%,rgba(10,10,10,.2) 55%,transparent 100%);z-index:1}
-.pcard-border{position:absolute;inset:0;border:2px solid transparent;transition:border-color .4s;z-index:3;pointer-events:none}
-.player-card:hover .pcard-border{border-color:var(--gold)}
-.player-avatar{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .5s ease;display:block;background:linear-gradient(135deg,#151515,#252525)}
-.player-card:hover .player-avatar{transform:scale(1.07)}
-.player-info{position:absolute;bottom:0;left:0;right:0;padding:1.5rem 1.2rem;z-index:2;transform:translateY(22px);transition:transform .4s ease}
-.player-card:hover .player-info{transform:translateY(0)}
-.player-num{font-family:'Bebas Neue',cursive;font-size:.95rem;color:var(--gold);letter-spacing:.05em;display:block}
-.player-name{font-family:'Bebas Neue',cursive;font-size:1.35rem;letter-spacing:.05em;line-height:1.1}
-.player-pos{font-size:.62rem;letter-spacing:.2em;color:rgba(245,240,232,.4);text-transform:uppercase;margin-top:.3rem;display:block}
-.player-nat{position:absolute;top:1rem;right:1rem;font-size:1.3rem;z-index:2;filter:drop-shadow(0 2px 4px rgba(0,0,0,.8))}
-.player-card.hidden{display:none}
-.peek{position:absolute;bottom:0;left:0;right:0;background:rgba(10,10,10,.93);padding:.8rem 1.2rem;z-index:4;opacity:0;transition:opacity .3s;display:flex;justify-content:space-around}
-.player-card:hover .peek{opacity:1}
-.peek-stat{text-align:center}
-.peek-val{font-family:'Bebas Neue',cursive;font-size:1.3rem;color:var(--gold);line-height:1;display:block}
-.peek-key{font-size:.55rem;letter-spacing:.15em;color:rgba(245,240,232,.35);text-transform:uppercase;display:block;margin-top:2px}
-/* NEWS */
-#news{padding:6rem 4rem;background:var(--gray)}
-.news-filter{display:flex;gap:2px;margin-bottom:2.5rem;flex-wrap:wrap}
-.nfbtn{font-family:'Oswald',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.45);background:var(--mid);border:none;padding:.5rem 1.2rem;cursor:none;transition:all .3s}
-.nfbtn.active{background:var(--gold);color:var(--black);font-weight:700}
-.nfbtn:not(.active):hover{color:var(--white)}
-.news-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:3px}
-.news-card{position:relative;overflow:hidden;background:var(--mid);cursor:none;transition:background .3s;min-height:230px}
-.news-card.featured{grid-row:1/3}
-.news-card:hover{background:#303030}
-.news-inner{padding:2rem;height:100%;display:flex;flex-direction:column;justify-content:flex-end;min-height:210px;position:relative;z-index:2}
-.news-card.featured .news-inner{min-height:480px}
-.ncbg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .6s,opacity .4s;opacity:.55;z-index:0}
-.news-card:hover .ncbg{transform:scale(1.07);opacity:.7}
-.ncoverlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.96) 0%,rgba(10,10,10,.55) 55%,rgba(10,10,10,.15) 100%);z-index:1}
-.ncat{font-size:.58rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;margin-bottom:.6rem;border:1px solid rgba(201,168,76,.4);padding:2px 8px;background:rgba(10,10,10,.4)}
-.ntitle{font-family:'Bebas Neue',cursive;font-size:1.45rem;line-height:1.1;letter-spacing:.03em;margin-bottom:.8rem}
-.news-card.featured .ntitle{font-size:2.4rem}
-.nmeta{font-size:.62rem;color:rgba(245,240,232,.45);letter-spacing:.1em}
-.news-card.hidden{display:none}
-/* STADIUM */
-#stadium{padding:6rem 4rem;background:var(--black);display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
-.stadium-visual{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#0f0f0f,#1c1c1c);overflow:hidden}
-.stadium-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease;display:block}
-.stadium-visual:hover .stadium-img{transform:scale(1.05)}
-.stadium-vignette{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.85) 0%,rgba(10,10,10,.15) 50%,transparent 100%);z-index:1}
-.stadium-label{position:absolute;bottom:1.5rem;left:1.5rem;font-family:'Bebas Neue',cursive;font-size:1.8rem;color:var(--gold);letter-spacing:.1em;z-index:2}
-.stadium-stripe{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));z-index:2}
-.stadium-info h2{font-family:'Bebas Neue',cursive;font-size:clamp(2rem,4vw,3.5rem);line-height:1;margin-bottom:1.5rem;letter-spacing:.03em}
-.stadium-info p{font-family:'Crimson Pro',serif;font-size:1.1rem;line-height:1.8;color:rgba(245,240,232,.6);margin-bottom:2rem}
-.stadium-facts{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.fact{border:1px solid rgba(201,168,76,.2);padding:1.2rem}
-.fact-val{font-family:'Bebas Neue',cursive;font-size:2rem;color:var(--gold);display:block}
-.fact-key{font-size:.62rem;letter-spacing:.15em;color:rgba(245,240,232,.35);text-transform:uppercase;display:block;margin-top:.2rem}
-/* TITLES */
-#titles{padding:5rem 4rem;background:var(--gold);color:var(--black);text-align:center;position:relative;overflow:hidden}
-#titles::before{content:'';position:absolute;width:36rem;height:36rem;top:50%;left:50%;transform:translate(-50%,-50%);background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/330px-BesiktasJK-Logo.svg.png') center/contain no-repeat;opacity:.06;pointer-events:none}
-#titles .section-label{color:rgba(10,10,10,.5)}
-#titles .section-title{margin-bottom:3rem}
-.titles-grid{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;position:relative;z-index:1}
-.title-item{position:relative;z-index:1}
-.title-count{font-family:'Bebas Neue',cursive;font-size:5rem;line-height:1;display:block}
-.title-name{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(10,10,10,.55);display:block}
-.title-icon{font-size:1.4rem;margin-bottom:.5rem;display:block}
-/* FOOTER */
-footer{background:#040404;padding:4rem;border-top:1px solid rgba(201,168,76,.12)}
-.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.footer-logo-row{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
-.footer-logo-img{height:42px;width:auto}
-.footer-logo{font-family:'Bebas Neue',cursive;font-size:2rem;letter-spacing:.15em;display:block}
-.footer-logo span{color:var(--gold)}
-.footer-tagline{font-family:'Crimson Pro',serif;font-style:italic;font-size:1rem;color:rgba(245,240,232,.35);line-height:1.6}
-.footer-col h4{font-size:.68rem;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:1.5rem}
-.footer-col ul{list-style:none}
-.footer-col li{margin-bottom:.8rem}
-.footer-col a{font-size:.85rem;color:rgba(245,240,232,.35);text-decoration:none;transition:color .3s;cursor:none}
-.footer-col a:hover{color:var(--white)}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid rgba(201,168,76,.08)}
-.footer-copy{font-size:.68rem;letter-spacing:.1em;color:rgba(245,240,232,.18)}
-.social-links{display:flex;gap:1rem}
-.social-link{width:36px;height:36px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;color:rgba(245,240,232,.35);text-decoration:none;transition:all .3s;cursor:none}
-.social-link:hover{border-color:var(--gold);color:var(--gold)}
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.12s}.reveal-delay-2{transition-delay:.22s}.reveal-delay-3{transition-delay:.32s}.reveal-delay-4{transition-delay:.42s}
-/* MODALS */
-.modal-overlay{position:fixed;inset:0;background:rgba(5,5,5,.9);z-index:800;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .35s;backdrop-filter:blur(8px)}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:var(--gray);border:1px solid rgba(201,168,76,.2);max-width:760px;width:calc(100% - 2rem);max-height:90vh;overflow-y:auto;position:relative;transform:translateY(30px);transition:transform .35s;scrollbar-width:thin;scrollbar-color:var(--gold) var(--mid)}
-.modal-overlay.open .modal{transform:translateY(0)}
-.modal-close{position:sticky;top:0;right:0;float:right;background:var(--mid2);border:none;color:var(--white);width:44px;height:44px;font-size:1.2rem;cursor:none;display:flex;align-items:center;justify-content:center;z-index:5;transition:background .3s}
-.modal-close:hover{background:var(--gold);color:var(--black)}
-.modal-header{padding:2.5rem 2.5rem 1.5rem;border-bottom:1px solid rgba(201,168,76,.1)}
-.modal-label{font-size:.6rem;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:.5rem}
-.modal-title{font-family:'Bebas Neue',cursive;font-size:2.6rem;letter-spacing:.04em;line-height:1}
-.modal-body{padding:2rem 2.5rem 2.5rem}
-/* TICKET */
-.step-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,240,232,.38);margin-bottom:1.2rem;display:block;padding-left:2px}
-.ticket-matches{display:flex;flex-direction:column;gap:2px;margin-bottom:2rem}
-.tmatch{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.4rem;background:var(--mid2);border:2px solid transparent;cursor:none;transition:all .3s;gap:1rem}
-.tmatch:hover{border-color:rgba(201,168,76,.3)}
-.tmatch.selected{border-color:var(--gold);background:rgba(201,168,76,.07)}
-.tm-teams{font-family:'Bebas Neue',cursive;font-size:1.35rem;letter-spacing:.05em}
-.tm-date{font-size:.62rem;color:rgba(245,240,232,.38);letter-spacing:.1em;margin-top:3px}
-.tm-price{font-family:'Bebas Neue',cursive;font-size:1.6rem;color:var(--gold);text-align:right}
-.tm-price small{font-family:'Oswald',sans-serif;font-size:.58rem;letter-spacing:.1em;color:rgba(245,240,232,.3);display:block}
-.seat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2rem}
-.seat-cat{padding:1.2rem;background:var(--mid2);border:2px solid transparent;cursor:none;transition:all .3s;text-align:center}
-.seat-cat:hover{border-color:rgba(201,168,76,.3)}
-.seat-cat.selected{border-color:var(--gold);background:rgba(201,168,76,.07)}
-.sc-name{font-family:'Bebas Neue',cursive;font-size:1.1rem;letter-spacing:.05em;display:block}
-.sc-price{color:var(--gold);font-size:.85rem;font-weight:600;display:block;margin-top:.3rem}
-.sc-note{font-size:.6rem;color:rgba(245,240,232,.3);letter-spacing:.1em;margin-top:.25rem;display:block}
-.qty-row{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem}
-.qty-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.45)}
-.qty-controls{display:flex;align-items:center;gap:.5rem}
-.qty-btn{width:36px;height:36px;background:var(--mid2);border:1px solid rgba(201,168,76,.2);color:var(--white);font-size:1.1rem;cursor:none;transition:all .3s;display:flex;align-items:center;justify-content:center}
-.qty-btn:hover{background:var(--gold);color:var(--black);border-color:var(--gold)}
-.qty-num{font-family:'Bebas Neue',cursive;font-size:1.8rem;color:var(--gold);min-width:2rem;text-align:center}
-.summary{background:var(--mid2);padding:1.5rem;margin-bottom:1.5rem;border-left:3px solid var(--gold)}
-.sum-row{display:flex;justify-content:space-between;margin-bottom:.5rem;font-size:.8rem;color:rgba(245,240,232,.5)}
-.sum-total{display:flex;justify-content:space-between;padding-top:.8rem;border-top:1px solid rgba(201,168,76,.15);font-size:1rem;font-weight:600}
-.sum-total span:last-child{color:var(--gold);font-family:'Bebas Neue',cursive;font-size:1.6rem}
-.buy-btn{width:100%;background:var(--gold);color:var(--black);border:none;padding:1.1rem;font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:.25em;text-transform:uppercase;font-weight:700;cursor:none;transition:all .3s}
-.buy-btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 25px rgba(201,168,76,.35)}
-.ticket-success{text-align:center;padding:2.5rem 0;display:none}
-.ticket-success h3{font-family:'Bebas Neue',cursive;font-size:3rem;color:var(--gold);margin-bottom:.5rem}
-.ticket-success p{font-family:'Crimson Pro',serif;font-size:1.1rem;color:rgba(245,240,232,.6);font-style:italic;line-height:1.8}
-/* PLAYER MODAL */
-.pm-top{display:flex;gap:2rem;margin-bottom:2rem;align-items:flex-start}
-.pm-avatar{width:130px;height:130px;background:var(--mid2);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden}
-.pm-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center}
-.pm-num{font-family:'Bebas Neue',cursive;font-size:1rem;color:var(--gold)}
-.pm-name{font-family:'Bebas Neue',cursive;font-size:2.6rem;line-height:1;letter-spacing:.04em}
-.pm-pos{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);margin-top:.3rem}
-.pm-nat{font-size:1.4rem;margin-top:.6rem}
-.pm-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:2rem}
-.sbox{background:var(--mid2);padding:1.1rem;text-align:center}
-.sbox-val{font-family:'Bebas Neue',cursive;font-size:2.1rem;color:var(--gold);line-height:1;display:block}
-.sbox-key{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(245,240,232,.3);display:block;margin-top:.25rem}
-.pm-bio{font-family:'Crimson Pro',serif;font-size:1.05rem;line-height:1.85;color:rgba(245,240,232,.55);font-style:italic}
-/* NEWS MODAL */
-.nm-cat{font-size:.6rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;display:inline-block;border:1px solid rgba(201,168,76,.3);padding:2px 8px;margin-bottom:1rem}
-.nm-title{font-family:'Bebas Neue',cursive;font-size:clamp(1.8rem,4vw,3rem);line-height:1.05;letter-spacing:.03em;margin-bottom:.8rem}
-.nm-meta{font-size:.65rem;color:rgba(245,240,232,.35);letter-spacing:.12em;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(201,168,76,.1)}
-.nm-hero{background:var(--mid2);height:280px;margin-bottom:2rem;background-size:cover;background-position:center}
-.nm-body p{font-family:'Crimson Pro',serif;font-size:1.1rem;line-height:1.9;color:rgba(245,240,232,.7);margin-bottom:1.4rem}
-.nm-body strong{color:var(--white);font-style:normal;font-weight:400}
-/* TOAST */
-.toast{position:fixed;bottom:2rem;right:2rem;background:var(--gold);color:var(--black);padding:1rem 1.8rem;font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;z-index:1000;transform:translateY(120px);transition:transform .4s}
-.toast.show{transform:translateY(0)}
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem}.nav-links{display:none}
-  .hero-content{padding:0 1.5rem}.hero-stats{right:1.5rem;gap:1.5rem}
-  #fixtures,#squad,#news,#stadium,#titles,footer{padding:4rem 1.5rem}
-  .news-grid{grid-template-columns:1fr}.news-card.featured{grid-row:auto}
-  #stadium{grid-template-columns:1fr;gap:2rem}
-  .footer-grid{grid-template-columns:1fr 1fr}
-  .fixture{grid-template-columns:80px 1fr 90px 1fr;gap:.8rem}.fixture-league{display:none}
-  .pm-stats{grid-template-columns:repeat(2,1fr)}.pm-top{flex-direction:column}
-  .seat-grid{grid-template-columns:1fr 1fr}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beşiktaş Canlı Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Tüm sayfa ayarları */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #0b0b0b;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Arka plandaki dev logo veya desen efekti */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 70%);
+            z-index: 1;
+        }
+
+        /* Ana Kart kutusu */
+        .container {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        /* Üstteki küçük kırmızı detay çizgisi */
+        .badge {
+            background-color: #e31b23;
+            color: white;
+            padding: 6px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(227, 27, 35, 0.4);
+        }
+
+        /* Büyük Başlık Tasarımı */
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        .hero-title .white-text {
+            color: #ffffff;
+            display: block;
+            font-size: 2.5rem;
+            opacity: 0.8;
+            font-weight: 400;
+        }
+
+        /* Telefondan gelen ve anlık değişen kısım */
+        .dynamic-text {
+            display: block;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            font-size: 4.5rem;
+            margin-top: 10px;
+            word-wrap: break-word;
+            transition: all 0.3s ease;
+        }
+
+        /* Alt süsleme çizgileri */
+        .stripes {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 30px;
+        }
+
+        .stripe {
+            height: 4px;
+            width: 40px;
+            background-color: #ffffff;
+        }
+        .stripe.black { background-color: #ffffff; }
+        .stripe.red { background-color: #e31b23; }
+
+        /* Mobil Ekranlar İçin Uyumluluk */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-title .white-text { font-size: 1.8rem; }
+            .dynamic-text { font-size: 3rem; }
+        }
+    </style>
 </head>
 <body>
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
-<!-- NAV -->
-<nav id="mainNav">
-  <a class="nav-logo" href="#hero">
-    <img class="nav-eagle" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/330px-BesiktasJK-Logo.svg.png" alt="Beşiktaş JK"/>
-    <span class="nav-brand">Beşiktaş <span>JK</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#fixtures" class="nli">Fikstür</a></li>
-    <li><a href="#squad" class="nli">Kadro</a></li>
-    <li><a href="#news" class="nli">Haberler</a></li>
-    <li><a href="#stadium" class="nli">Stadyum</a></li>
-    <li><a href="#titles" class="nli">Şampiyonluklar</a></li>
-  </ul>
-  <button class="nav-btn" id="openTicket">Bilet Al</button>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div><div class="hero-pattern"></div>
-  <img class="hero-crest" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/330px-BesiktasJK-Logo.svg.png" alt=""/>
-  <div class="hero-content">
-    <div class="hero-badge">⚫⚪ 2024–25 Sezonu</div>
-    <h1 class="hero-title">YALNIZ<span class="line2">BEŞİKTAŞ</span></h1>
-    <p class="hero-sub">İstanbul'un kalbinden doğan, Boğaz'ın kartalı. 1903'ten bugüne aynı ateş, aynı inanç, aynı güç.</p>
-    <div class="hero-ctas">
-      <a href="#fixtures" class="btn-primary">Maçları Gör</a>
-      <a href="#squad" class="btn-outline">Kadroyu İncele</a>
+    <div class="container">
+        <div class="badge">Anlık Mobil Bağlantı</div>
+        <h1 class="hero-title">
+            <span class="white-text">YALNIZ</span>
+            <span class="dynamic-text" id="ekran">BEŞİKTAŞ</span>
+        </h1>
+        <div class="stripes">
+            <div class="stripe black"></div>
+            <div class="stripe red"></div>
+            <div class="stripe black"></div>
+        </div>
     </div>
-  </div>
-  <div class="hero-stats">
-    <div class="stat"><span class="stat-num">16</span><span class="stat-label">Lig Şampiyonluğu</span></div>
-    <div class="stat"><span class="stat-num">9</span><span class="stat-label">Türkiye Kupası</span></div>
-    <div class="stat"><span class="stat-num">42K</span><span class="stat-label">Stadyum Kapasitesi</span></div>
-  </div>
-  <div class="scroll-hint"><span>Aşağı Kaydır</span><div class="scroll-line"></div></div>
-</section>
 
-<!-- TICKER -->
-<div class="ticker-wrap"><div class="ticker">
-  <span class="ticker-item">BEŞİKTAŞ 3–1 FENERBAHÇE <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">SEMİH KILIÇSOY 22 GOL <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">ÇARŞAMBA AVRUPA MAÇI <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">GEDSON HAFTANIN OYUNCUSU <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">VODAFONE PARK BİLETLERİ AÇILDI <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">BEŞİKTAŞ 3–1 FENERBAHÇE <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">SEMİH KILIÇSOY 22 GOL <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">ÇARŞAMBA AVRUPA MAÇI <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">GEDSON HAFTANIN OYUNCUSU <span class="ticker-sep">✦</span></span>
-  <span class="ticker-item">VODAFONE PARK BİLETLERİ AÇILDI <span class="ticker-sep">✦</span></span>
-</div></div>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-<!-- FİKSTÜR -->
-<section id="fixtures">
-  <div class="section-head reveal">
-    <div><span class="section-label">2024–25 Sezonu</span><h2 class="section-title">Fikstür</h2></div>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="all">Tümü</button>
-    <button class="tab-btn" data-tab="superlig">Süper Lig</button>
-    <button class="tab-btn" data-tab="avrupa">Avrupa</button>
-    <button class="tab-btn" data-tab="kupa">Kupa</button>
-  </div>
-  <div class="fixture-list">
-    <div class="fixture reveal" data-league="superlig">
-      <div class="fixture-date">8 Nis 2025</div>
-      <div class="fixture-team">Beşiktaş</div>
-      <div class="fixture-center"><span class="fixture-score win">4 — 0</span><span class="fixture-result win">GALİP</span></div>
-      <div class="fixture-team away">Ankaragücü</div>
-      <div class="fixture-league">Süper Lig<br>Vodafone Park</div>
-    </div>
-    <div class="fixture reveal reveal-delay-1" data-league="avrupa">
-      <div class="fixture-date">10 Nis 2025</div>
-      <div class="fixture-team">Porto</div>
-      <div class="fixture-center"><span class="fixture-score draw">2 — 2</span><span class="fixture-result draw">BERABERE</span></div>
-      <div class="fixture-team away">Beşiktaş</div>
-      <div class="fixture-league">UEFA Konferans<br>Dragão Stadı</div>
-    </div>
-    <div class="fixture reveal reveal-delay-2" data-league="superlig">
-      <div class="fixture-date">15 Nis 2025</div>
-      <div class="fixture-team">Beşiktaş</div>
-      <div class="fixture-center"><span class="fixture-score win">3 — 1</span><span class="fixture-result win">GALİP</span></div>
-      <div class="fixture-team away">Fenerbahçe</div>
-      <div class="fixture-league">Süper Lig<br>Vodafone Park</div>
-    </div>
-    <div class="fixture reveal" data-league="superlig">
-      <div class="fixture-date">20 Nis 2025</div>
-      <div class="fixture-team">Galatasaray</div>
-      <div class="fixture-center"><span class="fixture-score draw">1 — 1</span><span class="fixture-result draw">BERABERE</span></div>
-      <div class="fixture-team away">Beşiktaş</div>
-      <div class="fixture-league">Süper Lig<br>RAMS Park</div>
-    </div>
-    <div class="fixture next reveal" data-league="superlig">
-      <div class="fixture-date">27 Nis 2025<span class="next-badge">▶ SONRAKI MAÇ</span></div>
-      <div class="fixture-team">Beşiktaş</div>
-      <div class="fixture-center"><span class="fixture-vs">VS</span><span class="fixture-time">21:00</span></div>
-      <div class="fixture-team away">Trabzonspor</div>
-      <div class="fixture-league">Süper Lig<br>Vodafone Park</div>
-    </div>
-    <div class="fixture reveal" data-league="avrupa">
-      <div class="fixture-date">1 May 2025</div>
-      <div class="fixture-team">Beşiktaş</div>
-      <div class="fixture-center"><span class="fixture-vs">VS</span><span class="fixture-time">20:00</span></div>
-      <div class="fixture-team away">Porto</div>
-      <div class="fixture-league">UEFA Konferans<br>Vodafone Park</div>
-    </div>
-    <div class="fixture reveal" data-league="superlig">
-      <div class="fixture-date">3 May 2025</div>
-      <div class="fixture-team">Kasımpaşa</div>
-      <div class="fixture-center"><span class="fixture-vs">VS</span><span class="fixture-time">19:00</span></div>
-      <div class="fixture-team away">Beşiktaş</div>
-      <div class="fixture-league">Süper Lig<br>R.T.Erdoğan St.</div>
-    </div>
-    <div class="fixture reveal" data-league="kupa">
-      <div class="fixture-date">7 May 2025</div>
-      <div class="fixture-team">Beşiktaş</div>
-      <div class="fixture-center"><span class="fixture-vs">VS</span><span class="fixture-time">20:45</span></div>
-      <div class="fixture-team away">Galatasaray</div>
-      <div class="fixture-league">Türkiye Kupası<br>Yarı Final</div>
-    </div>
-    <div class="fixture reveal" data-league="superlig">
-      <div class="fixture-date">10 May 2025</div>
-      <div class="fixture-team">Beşiktaş</div>
-      <div class="fixture-center"><span class="fixture-vs">VS</span><span class="fixture-time">21:00</span></div>
-      <div class="fixture-team away">Başakşehir</div>
-      <div class="fixture-league">Süper Lig<br>Vodafone Park</div>
-    </div>
-    <div class="fixture reveal" data-league="superlig">
-      <div class="fixture-date">17 May 2025</div>
-      <div class="fixture-team">Samsunspor</div>
-      <div class="fixture-center"><span class="fixture-vs">VS</span><span class="fixture-time">19:00</span></div>
-      <div class="fixture-team away">Beşiktaş</div>
-      <div class="fixture-league">Süper Lig<br>Yeni Samsun St.</div>
-    </div>
-  </div>
-</section>
+    <script>
+        // Senin Firebase Bilgilerin
+        const firebaseConfig = {
+            apiKey: "AIzaSyBshUFXo45eBAvT4p1sRgV4twS7IZaoyxg",
+            authDomain: "mobisinav.firebaseapp.com",
+            databaseURL: "https://mobisinav-default-rtdb.firebaseio.com",
+            projectId: "mobisinav",
+            storageBucket: "mobisinav.firebasestorage.app",
+            messagingSenderId: "783045287383",
+            appId: "1:783045287383:web:99f67afa762a48f34bff92",
+            measurementId: "G-4RN6L29STP"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
-<!-- KADRO -->
-<section id="squad">
-  <div class="section-head reveal">
-    <div><span class="section-label">2024–25 Sezonu</span><h2 class="section-title">Oyuncu Kadrosu</h2></div>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" data-squad="all">Tümü</button>
-    <button class="tab-btn" data-squad="gk">Kaleci</button>
-    <button class="tab-btn" data-squad="def">Defans</button>
-    <button class="tab-btn" data-squad="mid">Orta Saha</button>
-    <button class="tab-btn" data-squad="fwd">Forvet</button>
-  </div>
-  <div class="squad-grid" id="squadGrid"></div>
-</section>
-
-<!-- HABERLER -->
-<section id="news">
-  <div class="section-head reveal">
-    <div><span class="section-label">Son Dakika</span><h2 class="section-title">Haberler</h2></div>
-  </div>
-  <div class="news-filter">
-    <button class="nfbtn active" data-cat="all">Tümü</button>
-    <button class="nfbtn" data-cat="mac">Maç Raporu</button>
-    <button class="nfbtn" data-cat="transfer">Transfer</button>
-    <button class="nfbtn" data-cat="kulup">Kulüp</button>
-    <button class="nfbtn" data-cat="soylesi">Söyleşi</button>
-  </div>
-  <div class="news-grid" id="newsGrid"></div>
-</section>
-
-<!-- STADYUM -->
-<section id="stadium">
-  <div class="stadium-visual reveal">
-    <div class="stadium-stripe"></div>
-    <img class="stadium-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg/1280px-T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg" alt="Tüpraş Stadyumu"/>
-    <div class="stadium-vignette"></div>
-    <div class="stadium-label">Tüpraş Stadyumu</div>
-  </div>
-  <div class="stadium-info reveal">
-    <span class="section-label">Ev Sahamız</span>
-    <h2>Tüpraş<br>Stadyumu</h2>
-    <p>İstanbul Boğazı'nı seyreden, denizin kokusunu alan eşsiz bir stadyum. Beşiktaş'ın kalbi 2016'dan bu yana burada atıyor. 42.000 taraftarın tek ses olduğu bu kutsal topraklarda rakipler titrer.</p>
-    <div class="stadium-facts">
-      <div class="fact"><span class="fact-val">42,198</span><span class="fact-key">Kapasite</span></div>
-      <div class="fact"><span class="fact-val">2016</span><span class="fact-key">Açılış Yılı</span></div>
-      <div class="fact"><span class="fact-val">Beşiktaş</span><span class="fact-key">İlçe</span></div>
-      <div class="fact"><span class="fact-val">Boğaz</span><span class="fact-key">Manzara</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ŞAMPIYONLUKLAR -->
-<section id="titles">
-  <div class="section-head reveal" style="justify-content:center;text-align:center;display:block"><span class="section-label">Tarihimiz</span><h2 class="section-title">Şampiyonluklarımız</h2></div>
-  <div class="titles-grid">
-    <div class="title-item reveal"><span class="title-icon">🏆</span><span class="title-count">16</span><span class="title-name">Süper Lig</span></div>
-    <div class="title-item reveal reveal-delay-1"><span class="title-icon">🥇</span><span class="title-count">9</span><span class="title-name">Türkiye Kupası</span></div>
-    <div class="title-item reveal reveal-delay-2"><span class="title-icon">🏅</span><span class="title-count">9</span><span class="title-name">Süper Kupa</span></div>
-    <div class="title-item reveal reveal-delay-3"><span class="title-icon">⭐</span><span class="title-count">121</span><span class="title-name">Yıl</span></div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo-row">
-        <img class="footer-logo-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/330px-BesiktasJK-Logo.svg.png" alt="Beşiktaş JK"/>
-        <span class="footer-logo">Beşiktaş <span>JK</span></span>
-      </div>
-      <p class="footer-tagline">"Yalnız Beşiktaş" — 1903'ten bu yana<br>İstanbul'un gururu, Türkiye'nin kartalı.</p>
-    </div>
-    <div class="footer-col"><h4>Kulüp</h4><ul><li><a href="#">Tarihçe</a></li><li><a href="#">Yönetim</a></li><li><a href="#">Akademi</a></li><li><a href="#">Kariyer</a></li></ul></div>
-    <div class="footer-col"><h4>Taraftar</h4><ul><li><a href="#">Üye Ol</a></li><li><a href="#" class="footer-ticket">Bilet Al</a></li><li><a href="#">Tribün Kuralları</a></li><li><a href="#">Fan Shop</a></li></ul></div>
-    <div class="footer-col"><h4>Medya</h4><ul><li><a href="#">Basın</a></li><li><a href="#">Fotoğraflar</a></li><li><a href="#">Beşiktaş TV</a></li><li><a href="#">Podcast</a></li></ul></div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2025 Beşiktaş Jimnastik Kulübü · Tüm hakları saklıdır.</span>
-    <div class="social-links"><a href="#" class="social-link">𝕏</a><a href="#" class="social-link">f</a><a href="#" class="social-link">📷</a><a href="#" class="social-link">▶</a></div>
-  </div>
-</footer>
-
-<!-- BİLET MODAL -->
-<div class="modal-overlay" id="ticketModal">
-  <div class="modal">
-    <button class="modal-close" data-close="ticketModal">✕</button>
-    <div class="modal-header"><span class="modal-label">Beşiktaş Bilet Satışı</span><h2 class="modal-title">Maç Bileti Al</h2></div>
-    <div class="modal-body" id="ticketBody">
-      <span class="step-label">1. Maç seçin</span>
-      <div class="ticket-matches">
-        <div class="tmatch selected" data-match="0"><div><div class="tm-teams">Beşiktaş — Trabzonspor</div><div class="tm-date">27 Nisan 2025, Pazar · 21:00 · Tüpraş Stadyumu · Süper Lig</div></div><div class="tm-price">₺450<small>den başlayan</small></div></div>
-        <div class="tmatch" data-match="1"><div><div class="tm-teams">Beşiktaş — Porto</div><div class="tm-date">1 Mayıs 2025, Perş. · 20:00 · Tüpraş Stadyumu · UEFA Konferans</div></div><div class="tm-price">₺650<small>den başlayan</small></div></div>
-        <div class="tmatch" data-match="2"><div><div class="tm-teams">Beşiktaş — Galatasaray</div><div class="tm-date">7 Mayıs 2025, Çar. · 20:45 · Tüpraş Stadyumu · Türkiye Kupası</div></div><div class="tm-price">₺550<small>den başlayan</small></div></div>
-      </div>
-      <span class="step-label">2. Kategori seçin</span>
-      <div class="seat-grid">
-        <div class="seat-cat selected" data-price="450" data-cname="3. Kat"><span class="sc-name">3. Kat</span><span class="sc-price">₺450</span><span class="sc-note">Kuzey Tribün</span></div>
-        <div class="seat-cat" data-price="750" data-cname="2. Kat"><span class="sc-name">2. Kat</span><span class="sc-price">₺750</span><span class="sc-note">Yan Tribün</span></div>
-        <div class="seat-cat" data-price="1200" data-cname="VIP Loca"><span class="sc-name">VIP</span><span class="sc-price">₺1.200</span><span class="sc-note">Loca · Servis Dahil</span></div>
-      </div>
-      <span class="step-label">3. Adet seçin</span>
-      <div class="qty-row">
-        <span class="qty-label">Bilet Adedi</span>
-        <div class="qty-controls"><button class="qty-btn" id="qtyMinus">−</button><span class="qty-num" id="qtyNum">1</span><button class="qty-btn" id="qtyPlus">+</button></div>
-      </div>
-      <div class="summary">
-        <div class="sum-row"><span>Maç</span><span id="sumMatch">Beşiktaş — Trabzonspor</span></div>
-        <div class="sum-row"><span>Kategori</span><span id="sumCat">3. Kat</span></div>
-        <div class="sum-row"><span>Adet</span><span id="sumQty">1</span></div>
-        <div class="sum-total"><span>Toplam</span><span id="sumTotal">₺450</span></div>
-      </div>
-      <button class="buy-btn" id="buyBtn">Satın Al &amp; Onayla</button>
-      <div class="ticket-success" id="ticketSuccess">
-        <div style="font-size:4rem;margin-bottom:1rem">✅</div>
-        <h3>Bilet Alındı!</h3>
-        <p>Biletiniz kayıt altına alındı.<br>Maçta görüşürüz, Kartal!</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- OYUNCU MODAL -->
-<div class="modal-overlay" id="playerModal">
-  <div class="modal">
-    <button class="modal-close" data-close="playerModal">✕</button>
-    <div class="modal-header"><span class="modal-label">Oyuncu Profili</span><h2 class="modal-title" id="pmTitle">—</h2></div>
-    <div class="modal-body">
-      <div class="pm-top"><div class="pm-avatar" id="pmAvatar"></div><div><div class="pm-num" id="pmNum"></div><div class="pm-name" id="pmName"></div><div class="pm-pos" id="pmPos"></div><div class="pm-nat" id="pmNat"></div></div></div>
-      <div class="pm-stats" id="pmStats"></div>
-      <p class="pm-bio" id="pmBio"></p>
-    </div>
-  </div>
-</div>
-
-<!-- HABER MODAL -->
-<div class="modal-overlay" id="newsModal">
-  <div class="modal">
-    <button class="modal-close" data-close="newsModal">✕</button>
-    <div class="modal-body" style="padding-top:2.5rem">
-      <span class="nm-cat" id="nmCat"></span>
-      <h2 class="nm-title" id="nmTitle"></h2>
-      <div class="nm-meta" id="nmMeta"></div>
-      <div class="nm-hero" id="nmHero"></div>
-      <div class="nm-body" id="nmBody"></div>
-    </div>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-/* IMAGE URLS (Wikimedia Commons) */
-const IMG = {
-  logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/BesiktasJK-Logo.svg/330px-BesiktasJK-Logo.svg.png',
-  stadium: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg/1280px-T%C3%BCpra%C5%9F_Stadyumu_20231011_2.jpg',
-  mertGunok: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Mert_G%C3%BCnok_%28cropped%29.jpg/500px-Mert_G%C3%BCnok_%28cropped%29.jpg',
-  ersinDestanoglu: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ersin_Destano%C4%9Flu_20231008_1_%28cropped%29.jpg/500px-Ersin_Destano%C4%9Flu_20231008_1_%28cropped%29.jpg',
-  emirhanTopcu: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Emirhan_Top%C3%A7u_20240802_%28cropped%29.jpg/500px-Emirhan_Top%C3%A7u_20240802_%28cropped%29.jpg',
-  gabrielPaulista: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Gabriel_Paulista_20240803.jpg/500px-Gabriel_Paulista_20240803.jpg',
-  alMusrati: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Al_musrati_asse_asm_2425.png/500px-Al_musrati_asse_asm_2425.png',
-  rosier: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Valentine_Rosier_20231008_%28cropped%29.jpg/500px-Valentine_Rosier_20231008_%28cropped%29.jpg',
-  gedson: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Gedson_Fernandes_%28cropped%29.jpg/500px-Gedson_Fernandes_%28cropped%29.jpg',
-  rafaSilva: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Rafa_Silva_20240803_%28cropped%29_wide.jpg/500px-Rafa_Silva_20240803_%28cropped%29_wide.jpg',
-  salihUcan: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Salih_U%C3%A7an_20231008_%28cropped%29.jpg/500px-Salih_U%C3%A7an_20231008_%28cropped%29.jpg',
-  semih: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Semih_K%C4%B1l%C4%B1%C3%A7soy_20240803.jpg/500px-Semih_K%C4%B1l%C4%B1%C3%A7soy_20240803.jpg',
-  immobile: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ciro_Immobile_20240803_%28cropped%29.jpg/500px-Ciro_Immobile_20240803_%28cropped%29.jpg',
-  rashica: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Milot_Rashica_in_2023_%28cropped%29.jpg/500px-Milot_Rashica_in_2023_%28cropped%29.jpg',
-  necipUysal: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Necip_Uysal_%28cropped%29.jpg/500px-Necip_Uysal_%28cropped%29.jpg'
-};
-
-/* PLAYER DATA */
-const players = [
-  {num:'#1',name:'Mert Günok',pos:'Kaleci',cat:'gk',nat:'🇹🇷',country:'Türkiye',img:IMG.mertGunok,
-   stats:[{k:'Maç',v:34},{k:'Gol Yok',v:12},{k:'Kurtarma',v:'81%'},{k:'Sarı Kart',v:1}],
-   bio:'Türk futbolunun en deneyimli kalecilerinden biri. Soğukkanlılığı ve refleksleriyle Kartal kalesini yıllardır korumaktadır. Milli takımın da birinci kalecisi olan Günok, büyük maçlardaki performansıyla taraftarların gözdesidir.'},
-  {num:'#31',name:'Ersin Destanoğlu',pos:'Kaleci',cat:'gk',nat:'🇹🇷',country:'Türkiye',img:IMG.ersinDestanoglu,
-   stats:[{k:'Maç',v:8},{k:'Gol Yok',v:3},{k:'Kurtarma',v:'76%'},{k:'Sarı Kart',v:0}],
-   bio:'Beşiktaş altyapısının yetiştirdiği genç ve yetenekli kaleci. Kulüp ona büyük bir gelecek planlamaktadır.'},
-  {num:'#4',name:'Emirhan Topçu',pos:'Stoper',cat:'def',nat:'🇹🇷',country:'Türkiye',img:IMG.emirhanTopcu,
-   stats:[{k:'Maç',v:28},{k:'Gol',v:2},{k:'Top Kes.',v:67},{k:'Pas İsabet',v:'87%'}],
-   bio:'Sert ve kararlı oyun anlayışıyla Beşiktaş savunmasının bel kemiği. Hava toplarındaki üstünlüğü ve liderlik vasfıyla takımın kaptanlarından biri konumundadır.'},
-  {num:'#5',name:'Gabriel',pos:'Stoper',cat:'def',nat:'🇧🇷',country:'Brezilya',img:IMG.gabrielPaulista,
-   stats:[{k:'Maç',v:30},{k:'Gol',v:3},{k:'Top Kes.',v:72},{k:'Pas İsabet',v:'89%'}],
-   bio:'Brezilyalı stoper, hız ve tekniği fiziksel gücüyle birleştirerek Beşiktaş savunmasına farklı bir boyut katmaktadır.'},
-  {num:'#3',name:'Al-Musrati',pos:'Sol Bek',cat:'def',nat:'🇱🇾',country:'Libya',img:IMG.alMusrati,
-   stats:[{k:'Maç',v:31},{k:'Gol',v:1},{k:'Asist',v:5},{k:'km/Maç',v:'11.2'}],
-   bio:'Libyalı sol bek, hücuma katılımı ve fiziksel dayanıklılığıyla öne çıkmaktadır. Sürekli koşusu ile sol kanatta büyük bir tehdit unsuru olmaktadır.'},
-  {num:'#2',name:'Valentin Rosier',pos:'Sağ Bek',cat:'def',nat:'🇫🇷',country:'Fransa',img:IMG.rosier,
-   stats:[{k:'Maç',v:25},{k:'Gol',v:2},{k:'Asist',v:7},{k:'km/Maç',v:'10.8'}],
-   bio:'Fransız sağ bek, hızlı geçişleri ve saldırı organizasyonuna katkılarıyla dikkat çekmektedir.'},
-  {num:'#8',name:'Gedson Fernandes',pos:'Orta Saha',cat:'mid',nat:'🇵🇹',country:'Portekiz',img:IMG.gedson,
-   stats:[{k:'Maç',v:33},{k:'Gol',v:6},{k:'Asist',v:9},{k:'Top Kap.',v:89}],
-   bio:'Portekizli dinamik orta saha oyuncusu Gedson, Beşiktaş\'ın motor gücüdür. Yorulmak bilmeyen koşusu ve gollerle sona eren hücum çabaları onu takımın vazgeçilmezi yapmıştır.'},
-  {num:'#10',name:'Rafa Silva',pos:'Sağ Kanat',cat:'mid',nat:'🇵🇹',country:'Portekiz',img:IMG.rafaSilva,
-   stats:[{k:'Maç',v:29},{k:'Gol',v:8},{k:'Asist',v:11},{k:'Dribbling',v:'68%'}],
-   bio:'Portekizli kanat oyuncusu, yaratıcılığı ve tekniğiyle İstanbul\'da büyük hayranlık uyandırmaktadır. Dar alanda top tutma kabiliyeti üst düzeydedir.'},
-  {num:'#6',name:'Salih Uçan',pos:'Orta Saha',cat:'mid',nat:'🇹🇷',country:'Türkiye',img:IMG.salihUcan,
-   stats:[{k:'Maç',v:27},{k:'Gol',v:3},{k:'Asist',v:6},{k:'Pas İsabet',v:'91%'}],
-   bio:'Deneyimli Türk orta saha oyuncusu, oyunu yönetme kapasitesi ve isabetli paslama anlayışıyla Beşiktaş\'ın belirleyici isimlerinden biridir.'},
-  {num:'#9',name:'Semih Kılıçsoy',pos:'Santrafor',cat:'fwd',nat:'🇹🇷',country:'Türkiye',img:IMG.semih,
-   stats:[{k:'Maç',v:32},{k:'Gol',v:22},{k:'Asist',v:7},{k:'İsabet',v:'72%'}],
-   bio:'Sadece 19 yaşında Türk futbolunun yeni yıldızı olan Semih Kılıçsoy, patlayıcı hızı ve güçlü vuruşuyla tüm Avrupa\'nın dikkatini çekmektedir. Bu sezon 22 golüyle ligin en iyi golcülerinden biri.'},
-  {num:'#7',name:'Ciro Immobile',pos:'Santrafor',cat:'fwd',nat:'🇮🇹',country:'İtalya',img:IMG.immobile,
-   stats:[{k:'Maç',v:26},{k:'Gol',v:13},{k:'Asist',v:5},{k:'Kafa Golü',v:4}],
-   bio:'İtalyan golcü Immobile, Serie A\'daki gol krallıkları ile dünya çapında tanınmaktadır. Beşiktaş\'ta da başarısını sürdüren deneyimli golcü, bitiricilik yeteneğiyle saldırıyı tamamlamaktadır.'},
-  {num:'#11',name:'Milot Rashica',pos:'Sol Kanat',cat:'fwd',nat:'🇽🇰',country:'Kosova',img:IMG.rashica,
-   stats:[{k:'Maç',v:24},{k:'Gol',v:5},{k:'Asist',v:8},{k:'Dribbling',v:'61%'}],
-   bio:'Kosovalı kanat oyuncusu Rashica, sol kanattaki hızlı geçişleri ve dinamik oyunuyla Beşiktaş hücumuna derinlik katmaktadır.'}
-];
-
-/* NEWS DATA — image URLs */
-const newsData = [
-  {cat:'Maç Raporu',catKey:'mac',img:IMG.semih,featured:true,
-   title:'Kartal Derbide Şahlaniyor: Beşiktaş 3–1 Fenerbahçe',
-   meta:'15 Nisan 2025 · 5 dk okuma · ✍️ Serhan Yılmaz',
-   body:`<p>Tüpraş Stadyumu, siyah-beyazlı taraftarların coşkusuyla adeta titredi. Süper Lig'in en kritik derbilerinden birinde <strong>Beşiktaş, Fenerbahçe'yi kendi evinde 3–1 mağlup etti</strong> ve şampiyonluk yarışında kritik bir adım attı.</p><p>Maçın ilk yarısında tempo düşük seyrederken, <strong>Semih Kılıçsoy'un 34. dakikada</strong> müthiş bir topuk vuruşuyla atışı ağları havalandırdı. Tribünler coşkunun zirvesine ulaştı.</p><p>İkinci yarıda Fenerbahçe beraberlik golünü bulmak için baskı kursa da, <strong>Gedson Fernandes'in 67. dakikadaki</strong> uzak mesafe vuruşu farkı tekrar ikiye çıkardı. Maçın son dakikasında Ciro Immobile'nin penaltı golüyle skor 3–1 kesinleşti.</p><p>Bu zafer, Beşiktaş'ı lig sıralamasında zirveden sadece 2 puan uzakta bıraktı.</p>`},
-  {cat:'Kulüp',catKey:'kulup',img:IMG.stadium,
-   title:"Tüpraş Stadyumu'nda Yeni Sezon Biletleri Açıldı",
-   meta:'12 Nisan 2025 · 3 dk okuma',
-   body:`<p>Beşiktaş JK, <strong>2025–26 sezonu abonelik biletlerinin satışa çıktığını</strong> duyurdu. Taraftarlar, tribün tercihlerine göre farklı fiyat seçeneklerinden yararlanabilecek.</p><p>Bu sezon ilk kez uygulanan <strong>dijital abonelik sistemi</strong> sayesinde biletler telefona yüklenerek stadyuma giriş yapılabilecek. Kulüp ayrıca 12 yaş altı taraftarlara yönelik yüzde 60 indirim sunduğunu da açıkladı.</p>`},
-  {cat:'Transfer',catKey:'transfer',img:IMG.semih,
-   title:"Semih Kılıçsoy Avrupa'nın Radarında",
-   meta:'10 Nisan 2025 · 4 dk okuma',
-   body:`<p>Henüz 19 yaşında Süper Lig'in en golcü oyuncularından biri haline gelen <strong>Semih Kılıçsoy</strong>, İngiliz ve Alman kulüplerinin yakın takibinde olduğu öğrenildi.</p><p><strong>Liverpool ve Borussia Dortmund</strong>'un izci ekiplerinin son haftalarda Tüpraş Stadyumu'nda genç yıldızı takip ettiği belirtildi. Kılıçsoy bu sezon 32 maçta 22 gol ve 7 asist kayıt altına aldı.</p><p>Beşiktaş yönetimi ise genç oyuncunun sözleşmesini uzatmak için görüşmeler yürüttüğünü doğruladı.</p>`},
-  {cat:'Kulüp',catKey:'kulup',img:IMG.logo,
-   title:'U19 Takımı Türkiye Şampiyonu Oldu',
-   meta:'8 Nisan 2025 · 2 dk okuma',
-   body:`<p>Beşiktaş U19 takımı, Türkiye Gençler Ligi'nde şampiyonluğa ulaşarak <strong>kulüp tarihine altın harflerle adını yazdırdı.</strong></p><p>Finalde Galatasaray U19 takımını <strong>2–0 mağlup eden</strong> genç kartallar, kupanın sahibi olmanın mutluluğunu tribünlerdeki taraftarlarıyla paylaştı.</p>`},
-  {cat:'Söyleşi',catKey:'soylesi',img:IMG.gedson,
-   title:'Gedson: "Beşiktaş Ailesinin Parçasıyım"',
-   meta:'6 Nisan 2025 · 6 dk okuma · Özel Röportaj',
-   body:`<p>Portekizli orta saha oyuncusu Gedson Fernandes, Beşiktaş dergisine özel bir röportaj verdi. <strong>"İstanbul'a ilk ayak bastığımda şehrin enerjisi beni büyüledi"</strong> diyen Gedson, taraftarlarla kurduğu bağı anlattı.</p><p>"Tüpraş Stadyumu'nda oynadığım her maç özel. Tribünler bizi hiç bırakmıyor, bu enerji sizi daha fazlasını vermeye zorluyor." diyen oyuncu bu sezonki performansından son derece memnun olduğunu belirtti.</p><p>Sözleşme yenilemesi konusunda da konuşan Gedson, <strong>"Beşiktaş'ta kalmak istiyorum, burada mutluyum"</strong> diyerek transfer söylentilerine nokta koydu.</p>`}
-];
-
-/* RENDER SQUAD */
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':'&quot;',"'":"&#39;"}[c]));}
-const squadGrid = document.getElementById('squadGrid');
-squadGrid.innerHTML = players.map((p,i)=>{
-  const peek = p.stats.slice(0,3).map(s=>`<div class="peek-stat"><span class="peek-val">${escapeHtml(s.v)}</span><span class="peek-key">${escapeHtml(s.k)}</span></div>`).join('');
-  return `<div class="player-card reveal" data-pos="${p.cat}" data-player="${i}">
-    <img class="player-avatar" src="${p.img}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#151515,#252525)';this.style.opacity='0';"/>
-    <div class="pcard-border"></div>
-    <div class="player-info">
-      <span class="player-num">${p.num}</span>
-      <span class="player-name">${escapeHtml(p.name)}</span>
-      <span class="player-pos">${escapeHtml(p.pos)}</span>
-    </div>
-    <div class="player-nat">${p.nat}</div>
-    <div class="peek">${peek}</div>
-  </div>`;
-}).join('');
-
-/* RENDER NEWS */
-const newsGrid = document.getElementById('newsGrid');
-newsGrid.innerHTML = newsData.map((n,i)=>{
-  return `<div class="news-card${n.featured?' featured':''}" data-cat="${n.catKey}" data-news="${i}">
-    <div class="ncbg" style="background-image:url('${n.img}')"></div>
-    <div class="ncoverlay"></div>
-    <div class="news-inner">
-      <span class="ncat">${escapeHtml(n.cat)}</span>
-      <h3 class="ntitle">${escapeHtml(n.title)}</h3>
-      <span class="nmeta">${escapeHtml(n.meta)}</span>
-    </div>
-  </div>`;
-}).join('');
-
-/* CURSOR */
-const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
-(function tick(){cursor.style.left=mx+'px';cursor.style.top=my+'px';rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(tick)})();
-document.addEventListener('mouseover',e=>{const t=e.target.closest('a,button,.player-card,.news-card,.fixture,.tmatch,.seat-cat');if(t){cursor.style.transform='translate(-50%,-50%) scale(2.5)';ring.style.width='60px';ring.style.height='60px'}else{cursor.style.transform='translate(-50%,-50%) scale(1)';ring.style.width='36px';ring.style.height='36px'}});
-
-/* REVEAL */
-const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
-/* NAV ACTIVE + SCROLL */
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').style.background=window.scrollY>50?'rgba(10,10,10,.97)':'rgba(10,10,10,.9)';
-  ['fixtures','squad','news','stadium','titles'].forEach(id=>{
-    const el=document.getElementById(id),link=document.querySelector(`.nli[href="#${id}"]`);
-    if(el&&link){const r=el.getBoundingClientRect();link.classList.toggle('active',r.top<=100&&r.bottom>100)}
-  });
-});
-
-/* SMOOTH SCROLL */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const target=document.querySelector(a.getAttribute('href'));
-    if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}
-  });
-});
-
-/* FIXTURE TABS */
-document.querySelectorAll('[data-tab]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-tab]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const tab=btn.dataset.tab;
-    document.querySelectorAll('.fixture-list .fixture').forEach(f=>{f.classList.toggle('hidden',tab!=='all'&&f.dataset.league!==tab)});
-  });
-});
-
-/* SQUAD FILTER */
-document.querySelectorAll('[data-squad]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-squad]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.player-card').forEach(c=>c.classList.toggle('hidden',btn.dataset.squad!=='all'&&c.dataset.pos!==btn.dataset.squad));
-  });
-});
-
-/* PLAYER MODAL */
-document.querySelectorAll('.player-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    const p=players[+card.dataset.player];
-    document.getElementById('pmTitle').textContent=p.name;
-    document.getElementById('pmAvatar').innerHTML = `<img src="${p.img}" alt="${escapeHtml(p.name)}"/>`;
-    document.getElementById('pmNum').textContent=p.num;
-    document.getElementById('pmName').textContent=p.name;
-    document.getElementById('pmPos').textContent=p.pos;
-    document.getElementById('pmNat').textContent=p.nat+' '+p.country;
-    document.getElementById('pmStats').innerHTML=p.stats.map(s=>`<div class="sbox"><span class="sbox-val">${escapeHtml(s.v)}</span><span class="sbox-key">${escapeHtml(s.k)}</span></div>`).join('');
-    document.getElementById('pmBio').textContent=p.bio;
-    openModal('playerModal');
-  });
-});
-
-/* NEWS FILTER */
-document.querySelectorAll('.nfbtn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.nfbtn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const cat=btn.dataset.cat;
-    const cards=[...document.querySelectorAll('#newsGrid .news-card')];
-    cards.forEach(c=>c.classList.toggle('hidden',cat!=='all'&&c.dataset.cat!==cat));
-    let first=true;
-    cards.forEach(c=>{if(!c.classList.contains('hidden')){c.classList.toggle('featured',first);first=false}else c.classList.remove('featured')});
-  });
-});
-
-/* NEWS MODAL */
-document.querySelectorAll('.news-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    const n=newsData[+card.dataset.news];
-    document.getElementById('nmCat').textContent=n.cat;
-    document.getElementById('nmTitle').textContent=n.title;
-    document.getElementById('nmMeta').textContent=n.meta;
-    document.getElementById('nmHero').style.backgroundImage=`url('${n.img}')`;
-    document.getElementById('nmBody').innerHTML=n.body;
-    openModal('newsModal');
-  });
-});
-
-/* TICKET */
-let selMatch=0,selPrice=450,selCatName='3. Kat',qty=1;
-const matchNames=['Beşiktaş — Trabzonspor','Beşiktaş — Porto','Beşiktaş — Galatasaray'];
-function updateSum(){document.getElementById('qtyNum').textContent=qty;document.getElementById('sumMatch').textContent=matchNames[selMatch];document.getElementById('sumCat').textContent=selCatName;document.getElementById('sumQty').textContent=qty;document.getElementById('sumTotal').textContent='₺'+(selPrice*qty).toLocaleString('tr-TR')}
-document.querySelectorAll('.tmatch').forEach(m=>m.addEventListener('click',()=>{document.querySelectorAll('.tmatch').forEach(x=>x.classList.remove('selected'));m.classList.add('selected');selMatch=+m.dataset.match;updateSum()}));
-document.querySelectorAll('.seat-cat').forEach(s=>s.addEventListener('click',()=>{document.querySelectorAll('.seat-cat').forEach(x=>x.classList.remove('selected'));s.classList.add('selected');selPrice=+s.dataset.price;selCatName=s.dataset.cname;updateSum()}));
-document.getElementById('qtyMinus').addEventListener('click',()=>{if(qty>1){qty--;updateSum()}});
-document.getElementById('qtyPlus').addEventListener('click',()=>{if(qty<10){qty++;updateSum()}});
-document.getElementById('buyBtn').addEventListener('click',()=>{
-  document.querySelectorAll('#ticketBody .step-label,#ticketBody .ticket-matches,#ticketBody .seat-grid,#ticketBody .qty-row,#ticketBody .summary,#ticketBody .buy-btn').forEach(el=>el.style.display='none');
-  document.getElementById('ticketSuccess').style.display='block';
-  showToast('Bilet başarıyla alındı!');
-});
-
-/* MODAL */
-function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
-function closeModal(id){
-  document.getElementById(id).classList.remove('open');document.body.style.overflow='';
-  if(id==='ticketModal'){setTimeout(()=>{document.getElementById('ticketSuccess').style.display='none';document.querySelectorAll('#ticketBody .step-label,#ticketBody .ticket-matches,#ticketBody .seat-grid,#ticketBody .qty-row,#ticketBody .summary,#ticketBody .buy-btn').forEach(el=>el.style.display='')},400)}
-}
-document.getElementById('openTicket').addEventListener('click',()=>openModal('ticketModal'));
-document.querySelectorAll('.footer-ticket').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openModal('ticketModal')}));
-document.querySelectorAll('[data-close]').forEach(btn=>btn.addEventListener('click',()=>closeModal(btn.dataset.close)));
-document.querySelectorAll('.modal-overlay').forEach(ov=>ov.addEventListener('click',e=>{if(e.target===ov)closeModal(ov.id)}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(ov=>closeModal(ov.id))});
-
-/* TOAST */
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500)}
-</script>
+        // Firebase'den veriyi çekip tırnakları temizleyen sihirli kod
+        database.ref('besiktas').on('value', (snapshot) => {
+            const veri = snapshot.val();
+            if (veri) {
+                // Gelen verideki tırnak ve ters eğik çizgileri süpürüyoruz
+                let temizMetin = String(veri).replace(/["\\]/g, '');
+                document.getElementById("ekran").innerText = temizMetin.toUpperCase();
+            } else {
+                document.getElementById("ekran").innerText = "BEŞİKTAŞ";
+            }
+        });
+    </script>
 </body>
 </html>
