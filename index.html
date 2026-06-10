@@ -75,7 +75,7 @@
 
         function temizle(val) { return String(val || '').replace(/["']/g, ""); }
 
-        db.ref('title').on('value', (s) => { document.getElementById('uppertitle-alan').innerText = s.val() ? temizle(s.val()) : 'ANLIK BİLDİRİM'; });
+        db.ref('uppertitle').on('value', (s) => { document.getElementById('uppertitle-alan').innerText = s.val() ? temizle(s.val()) : 'ANLIK BİLDİRİM'; });
         db.ref('title').on('value', (s) => { document.getElementById('title-alan').innerText = s.val() ? temizle(s.val()) : 'ANLIK BİLDİRİM'; });
         db.ref('content').on('value', (s) => { document.getElementById('content-alan').innerText = s.val() ? temizle(s.val()) : 'BEŞİKTAŞ'; });
         db.ref('description').on('value', (s) => { document.getElementById('description-alan').innerText = s.val() ? temizle(s.val()) : 'ŞAMPİYONLAR LİGİ ŞAMPİYONU'; });
