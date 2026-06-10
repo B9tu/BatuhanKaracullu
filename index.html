@@ -39,10 +39,10 @@
 <body>
 
     <div class="container">
-        <div id="title-alan">YÜKLENİYOR...</div>
+        <div id="uppertitle-alan">YÜKLENİYOR...</div>
         
         <h1 class="hero-title">
-            <span class="white-text">YALNIZ</span>
+            <span class="white-text" id="title-alan">YALNIZ</span>
             <span id="content-alan">BEŞİKTAŞ</span>
         </h1>
 
@@ -75,6 +75,7 @@
 
         function temizle(val) { return String(val || '').replace(/["']/g, ""); }
 
+        db.ref('title').on('value', (s) => { document.getElementById('uppertitle-alan').innerText = s.val() ? temizle(s.val()) : 'ANLIK BİLDİRİM'; });
         db.ref('title').on('value', (s) => { document.getElementById('title-alan').innerText = s.val() ? temizle(s.val()) : 'ANLIK BİLDİRİM'; });
         db.ref('content').on('value', (s) => { document.getElementById('content-alan').innerText = s.val() ? temizle(s.val()) : 'BEŞİKTAŞ'; });
         db.ref('description').on('value', (s) => { document.getElementById('description-alan').innerText = s.val() ? temizle(s.val()) : 'ŞAMPİYONLAR LİGİ ŞAMPİYONU'; });
